@@ -1,17 +1,15 @@
-// React useState value kab reset hoti hai?
+// React useState value kab reset hoti hai?, you will learn it in few minutes
 
-// React state: component instance ke saath tied hoti hai
+// Remember => React state: component instance ke saath tied hoti hai
 
-// Jab component:
-// destroy/unmount hota hai, ya new instance banta hai
-// tab state reset ho sakti hai.
+// Jab component: destroy/unmount hota hai, ya new instance banta hai tab state reset ho sakti hai.
 
 
 // ---------------------------- State HOLD rehti hai when:
 // Normal re-render
 setCount(count + 1)
 // 👉 component re-render hoga
-// 👉 BUT state preserve rahegi.
+// 👉 BUT state preserve rahegi, means state ki value reset nhi hogi, jo changes hua usko lekr it will continue.
 
 // Parent re-render
 // Parent render hua?
