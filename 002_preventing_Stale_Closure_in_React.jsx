@@ -39,10 +39,12 @@ useEffect(() => {
 const [count, setCount] = useState(0)
 const countRef = useRef(count)
 
+// remember to update the current value of useRef, so that latest value mile useRef me when needed and changed by rendering.
 useEffect(() => {
   countRef.current = count
 }, [count])
 
+// now even if callback queue me chla jaaye console function, it will have the latest value.
 useEffect(() => {
   const id = setInterval(() => {
     console.log(countRef.current) // now it reads latest value even after it runs anytime or manytime in future.
