@@ -1,4 +1,4 @@
-# ⚛️ React Deep Fundamentals
+# ⚛️ React Deep HandWritten Fundamentals
 
 > Not another “React notes” repository.
 
