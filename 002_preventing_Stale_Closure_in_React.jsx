@@ -92,6 +92,8 @@ setInterval(() => {
 // re-render hua ho
 // still correct latest value milegi.
 
+//  for more deep analysis on functional update, check useState file
+
 
 // ---------------------------- 🎯FINAL CONCLUSION 🎯 -----------------------------------
 // If async callback needs: 
