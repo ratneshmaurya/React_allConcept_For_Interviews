@@ -28,9 +28,16 @@ setCount(count + 1)
 
 // Example
 const [count, setCount] = useState(0)
-
 // Refresh ke baad:
 count = 0
+
+// **** Important concept
+// useState is MEMORY-BASED
+// State lives in:  RAM (browser memory during runtime)
+// So:
+// refresh ❌ → memory wipe → state gone
+// tab close ❌ → state gone
+// crash ❌ → state gone
 
 
 // ----------2️⃣ Component unmount + remount
