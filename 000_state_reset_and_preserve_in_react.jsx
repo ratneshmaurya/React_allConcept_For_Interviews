@@ -39,6 +39,11 @@ count = 0
 // tab close ❌ → state gone
 // crash ❌ → state gone
 
+// Agar tum chahte ho state survive kare refresh ke baad:
+// use:
+// localStorage
+// sessionStorage
+// backend DB
 
 // ----------2️⃣ Component unmount + remount
 
