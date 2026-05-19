@@ -193,7 +193,10 @@ refOne:{
   current: 0
 }
 
-//  USECASE -
+// You may ask like - it is also an object right, so on re-render ye bhi new object bnna chahiye right ? then useRef ka 
+// importance hi khtm fit toh ?? ---->> see answer in hooks_vs_normalObject file.
+
+//  ************************* USECASE -
 
 // 1-) Accessing DOM Elements : MOST common beginner use case.
 // Example
