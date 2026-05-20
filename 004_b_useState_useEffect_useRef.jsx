@@ -6,8 +6,12 @@
 // It allows component to: store data, update UI, preserve values between renders
 
 // React compares dependencies using: Object.is(). Mostly reference comparison. so agr 
-// primitve value hai, then changing values are okay, but if agr object/array hai then must change using spread 
-// operator to have new object refenrce.
+// primitve value hai, then changing values directly are okay as they create new refenece, but if agr 
+// object/array hai then must change using spread operator to have new object refenrce.
+// For comparison :
+// for primitve -> value compares
+// For object/array/fucntions --> reference comapres
+
 
 // If changing value: should update UI AND RE-RENDER THEN 👉 useState.
 
