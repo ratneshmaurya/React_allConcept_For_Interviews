@@ -17,8 +17,9 @@
 
 // Re-render pe: component function reruns, BUT: state reset nahi hoti because React stores state separately internally.
 
-// 🧠-----------  Deep Internal Understanding
-// setState: immediately DOM update nahi karta
+// 🧠--------------------------------  Deep Internal Understanding
+
+// 1-) setState: immediately DOM update nahi karta
 // It: schedules update
 // React later: batches updates, reconciles, renders efficiently
 // 💣 So: all changes happens in next render only, not change current snapshot or render
@@ -49,7 +50,34 @@ function App() {
 // setState(): current snapshot ko modify nahi karta, next render queue karta hai
 // Ye React ka core behavior hai.
 
-// Common Mistake to Remember ----------------------
+// 2-) ----------------------------- Object normal vs Object in UseState:
+// CASE 1 — Object directly render me create karna
+//   const user = {
+//     name: "ratnesh"
+//   }
+
+// Every render:new object created. because component function reruns. So: oldUser !== newUser
+// Consequence: If: Child wrapped in React.memo, still: child rerender because prop reference changed.
+// ✅ Here useMemo use krna hota hai hume to bind this object.
+
+
+// CASE 2 — Object inside useState
+// const [user, setUser] = useState({
+//   name: "ratnesh"
+// })
+
+// Now: React stores object internally, NOT recreated on every render.
+// Meaning: Even if component rerenders: same object reference reused, until: setUser called
+// So:✅ NO need of useMemo here normally. Because: useState already preserves reference
+// When update happens using spread operator.
+// setUser(prev => ({
+//   ...prev,
+//   age: 24
+// }))
+// Now: new object reference created intentionally, because state changed. And:rerender should happen
+
+
+// Common Mistake to Remember --------------------------------------------
 // 1-) -------------- Mutating objects directly
 // user.name = "ratnesh", ❌ Wrong
 // setUser(user)
