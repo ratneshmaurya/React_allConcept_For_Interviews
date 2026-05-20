@@ -8,7 +8,9 @@
 // internally state value ko remember karta hai, so even if the function is recreated, it will 
 // remember the updated state value.
 
-// ---------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
+// --------------------------------- CLOSURES ------------------------------------------------------------------
+
 // EXAMPLE: creating an inner handleClick() function inside a component counter() function.
 function Counter() {
   const [count, setCount] = useState(0)
@@ -115,8 +117,9 @@ setCount(2)
 // NEW handleClick remembers 2
 // 💣 THIS is how React uses closures.
 
-// -------------------------------------------------------------------------------
-// --------------------------------- STALE CLOSURE ---------------------------------
+// -----------------------------------------------------------------------------------------------------------------
+// --------------------------------- STALE CLOSURE -----------------------------------------------------------------
+
 // Stale closure: when a function remembers old value, and not the updated value, then we call it stale closure.
 // **** Closure problem tab hoti hai when: koi function future me execute ho AND wo old render ke values remember kare****
 // So Stale-closure => When asyn operation is inside a function and that asyn call executes later.
@@ -127,6 +130,8 @@ setCount(2)
 // event listeners
 // promises
 // async callbacks
+// subscriptions
+// websockets
 // me dikhti hain.
 
 // Becoz, when they moved to callback queue(as they all are asyn operations) they take the old closure 
@@ -293,6 +298,6 @@ function Counter() {
 // karta hai, wo stale closure ban jata hai, and jab wo execute hota hai after 3 sec, toh output: 0 hi rhta hai
 // becoz wo callback queue me tha.
 
-//  So always remember agr, callback queue me koi function gaya hai, toh wo stale closure ban sakta hai, 
+// So always remember agr, callback queue me koi function gaya hai, toh wo stale closure ban sakta hai, 
 // becoz wo old closure value ko pakad ke baitha hai, and jab wo execute hoga, toh wo old value ko hi use 
 // karega, even if the state value is updated in meantime.
