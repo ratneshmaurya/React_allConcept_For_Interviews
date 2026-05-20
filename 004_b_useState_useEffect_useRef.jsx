@@ -137,7 +137,7 @@ setInterval(() => {
 // 1-) No dependency array used, then runs after every render. Why?, Because React assumes: effect depends on everything
 // 2-) Empty dependency array[], then Runs: only after first mount. because: dependencies never change
 // 💣 But NOT truly “once”
-// If component: unmounts then remounts, effect runs again.=
+// If component: unmounts then remounts means firse UI me aaye, effect runs again.=
 // 3-) Specific dependency [Count]: Runs when: count changes
 // 🧠 React compares dependencies using: Object.is(). Mostly reference comparison. so agr 
 // primitve value hai, then changing values are okay, but if agr object/array hai then must change using spread 
@@ -176,6 +176,14 @@ useEffect(() => {
 // Why dangerous? Every mount: new interval survives forever, as we are not clearning the previous intervals
 
 
+// CASE:3 - Using object in useEffect dependecy
+let objOne = { name: "ratnesh"}
+useEffect(() => {
+  // .........
+}, [objOne])
+// it will re-run useEffect every render, becoz object will be having new refernce on each render.
+// So must use or wrap the objecty using useMemo, so that it willl have stable reference on every render.
+// check more in useMemo file
 
 
 // ==================================================================================================================
