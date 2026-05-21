@@ -42,6 +42,17 @@
 
 // USECASE:
 // 1-) To memoize expensive calculations
+function App() {
+  const [count, setCount] = useState(0)
+  const sorted = bigArray.sort()
+//   return ...
+}
+// Ab: count change hua  --> component re-render hua  --> sort() AGAIN run 💀, Even though array same hai.
+
+// useMemo solution: sirf tab recompute hoga when bigArray change ho.
+const sorted = useMemo(() => {
+  return bigArray.sort()
+}, [bigArray])
 
 
 // 2-) Stable object references: VERY IMPORTANT production use.
@@ -87,6 +98,28 @@ const data = useMemo(() => ({
 // Now: new object reference created intentionally, because state changed. And:rerender should happen
 
 
+// *********************** Overall USECASE:
+// ✅ expensive calculations
+// ✅ large lists
+// ✅ filtering/sorting
+// ✅ stable object reference
+// ✅ preventing child rerenders
+// ✅ dependency arrays
+
+
+
+// =====================================REAL CONFUSION ======================================================
+// ==========================================================================================================
+// You may say ki bhai useMemo me bhi function de rhe ho, useCallback me bhi function de rhe ho????
+// 🔥 Case1: Agr: “function rerun se bachana (I mean parent me hi wo function on re-render of parent, firse na chle) → useMemo”
+// Heavy function ka result dena ho child ko toh yhi use kro:
+// const value = useMemo(() => heavyFunction(), [])
+// <Child data={value} />
+// Yaha: heavy calc avoid, stable value mil sakta
+
+// 🔥 Case:2: Agr:  “child rerender se bachana because function ko hi prop me de rhe hai child ke → useCallback”
+// Function still re-reun, but react pass the old refernce only not the new one
+
 
 
 
@@ -104,7 +137,7 @@ const data = useMemo(() => ({
 // as these both hooks preserve reference, but comparison of refernce is done by react.memo, without react.memo child
 // will always re-render, bhle hi we will use useMmemo or pass same reference things in props, doesnot matter
 
-// 2️⃣ Stable function dependencies in hooks
+// 2️⃣ Stable function dependencies in hooks or dependency arrays
 // Example
 useEffect(() => {
   fetchData()
