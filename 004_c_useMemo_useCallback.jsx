@@ -154,7 +154,7 @@ const fetchData = useCallback(() => {
 
 
 
-// ============================= IMPORTANT===================================================================
+// ============================= IMPORTANT FOR USE CALLBACK==============================================================
 
 // CASE:1: ⚛️ IMPORTANT: React.Memo with useMemo and useCallback hooks
 // useMemo() and useCallback() mainly preserve references.
@@ -211,6 +211,32 @@ const fetchData = useCallback(() => {
 // Functional updates → get latest state safely from React
 // useRef → manually access latest mutable value without rerunning hooks
 
+
+
+// =====================================IMPORTANT FOR ALL ======================================================
+// =============================================================================================================
+
+// CASE:1: YOU MAY SAY KI AGR PROPS HI NA HO CHILD ME FROM PARENT, THEN ON PARENT RE-RENDER, CHILD ALWAYS RE-RENDER 
+// Becoz react.emo kya hi compare krega, props toh hai hi nhi ???
+    const Child = React.memo(function Child() {
+    console.log("child render")
+    return <div>Child</div>
+    })
+// Now: parent rerender hua, React checks props
+// Props: {}, (old empty object vs new empty object conceptually, both are empty and same)
+// React shallow compare karta. No prop changes. So: child rerender SKIP ho jayega 🔥
+
+
+// CASE:2: Context change, that STILL force rerender. Even with React.memo.
+// i.e agr child is using any context from provider, then if the value of provider changes, then react.memo kaam nhi kregga.
+//  const theme = useContext(ThemeContext)
+// Context updated: rerender, Even with memo. (Read more in details in useContext file)
+
+// CAse:3: Child ka Internal state change, that STILL force rerender. Even with React.memo.
+// const Child = React.memo(() => {
+//   const [count, setCount] = useState(0)
+// })
+// Child ka own state change: rerender karega Obviously.
 
 // 
 // 
