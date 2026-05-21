@@ -46,10 +46,25 @@
 // 2-) Stable object references: VERY IMPORTANT production use.
 // Why? Because: objects recreate every render, So Without useMemo, same object before render and after render are not equal
 // So: for these 2 cases, it will create issue:
-
 // a-) Parent child props case: React.memo also not work fully and children rerender hoga
 // b-) Useeffect case having object in dependecy array: useEffect retriggers, becoz referrence change hoga
 // Hence always wrap the object in useMemo beccoz: useMemo stabilizes reference.
+
+// But if suing object isnide useState then no need of useMemo():
+    const [user, setUser] = useState({
+    name: "ratnesh"
+    })
+// Now: React stores object internally, NOT recreated on every render.
+// Meaning: Even if component rerenders: same object reference reused, until: setUser called
+// So:✅ NO need of useMemo here normally. Because: useState already preserves reference
+// When update happens using spread operator.
+// setUser(prev => ({
+//   ...prev,
+//   age: 24
+// }))
+// Now: new object reference created intentionally, because state changed. And:rerender should happen
+
+
 
 // Example:
 // Child Component
